@@ -14,3 +14,10 @@ public enum Estado
         Gaseoso,
         Intermedio
     }
+
+public enum Genero
+{
+    Femenino,
+    Masculino,
+    Otro
+}

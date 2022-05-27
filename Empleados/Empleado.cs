@@ -3,11 +3,11 @@ public class Empleado
     string nombre, apellido;
     DateTime fechaNacimiento, fechaIngreso;
     Estado estado;
-    char genero;
+    Genero genero;
     double sueldoBasico;
     Cargos cargo;
 
-    public Empleado(string nombre, string apellido, DateTime fechaNacimiento, DateTime fechaIngreso, char genero, Cargos cargo, double sueldoBasico, Estado estado)
+    public Empleado(string nombre, string apellido, DateTime fechaNacimiento, DateTime fechaIngreso, Genero genero, Cargos cargo, double sueldoBasico, Estado estado)
     {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -25,10 +25,21 @@ public class Empleado
         return antiguedad;
     }
 
-    public DateTime edad()
+    public int edad()
     {
         DateTime edad = DateTime.Now.Year - fechaNacimiento.Value.Year;
         return edad;
+    }
+
+    public AnoJubila()
+    {
+        if(this.genero == 'Femenino')
+        {
+            return 60 - edad();
+        }else
+        {
+            return 65 - edad();
+        }
     }
 
 }
