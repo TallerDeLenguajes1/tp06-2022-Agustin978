@@ -74,6 +74,10 @@ public class Empleado
 
     public double Salario()
     {
+        if(this.estadoC.Equals("C"))
+        {
+            return this.sueldoBasico + Adicional() + 15000;
+        }
         return this.sueldoBasico + Adicional();
     }
 
