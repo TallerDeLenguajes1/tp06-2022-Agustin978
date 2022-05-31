@@ -6,18 +6,3 @@ public enum Cargos
         Especialista,
         Investigador
     }
-
-public enum Estado
-    {
-        Liquido,
-        Solido,
-        Gaseoso,
-        Intermedio
-    }
-
-public enum Genero
-{
-    Femenino,
-    Masculino,
-    Otro
-}

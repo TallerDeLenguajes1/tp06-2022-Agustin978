@@ -2,12 +2,12 @@ public class Empleado
 {
     string nombre, apellido;
     DateTime fechaNacimiento, fechaIngreso;
-    Estado estado;
-    Genero genero;
+    Char estadoC;
+    char genero;
     double sueldoBasico;
     Cargos cargo;
 
-    public Empleado(string nombre, string apellido, DateTime fechaNacimiento, DateTime fechaIngreso, Genero genero, Cargos cargo, double sueldoBasico, Estado estado)
+    public Empleado(string nombre, string apellido, DateTime fechaNacimiento, DateTime fechaIngreso, char genero, Cargos cargo, double sueldoBasico, char estadoC)
     {
         this.nombre = nombre;
         this.apellido = apellido;
@@ -16,30 +16,73 @@ public class Empleado
         this.genero = genero;
         this.sueldoBasico = sueldoBasico;
         this.cargo = cargo;
-        this.estado = estado;
+        this.estadoC = estadoC;
     }
 
-    public double antiguedadEnEmpresa()
+    public int antiguedadEnEmpresa()
     {
-        DateTime antiguedad = DateTime.Now.Year - fechaIngreso.Value.Year;
+        int antiguedad = DateTime.Today.AddTicks(-fechaIngreso.Ticks).Year - 1;
         return antiguedad;
     }
 
     public int edad()
     {
-        DateTime edad = DateTime.Now.Year - fechaNacimiento.Value.Year;
+        int edad = DateTime.Today.AddTicks(-fechaNacimiento.Ticks).Year - 1;
         return edad;
     }
 
-    public AnoJubila()
+    public int AnoJubila()
     {
-        if(this.genero == 'Femenino')
+        if(this.genero.CompareTo("Femenino") == 0)
         {
             return 60 - edad();
         }else
         {
             return 65 - edad();
         }
+    }
+
+    public double Adicional()
+    {
+        double adicional = 0;
+        int add;
+        if(antiguedadEnEmpresa()>20)
+        {
+            add = 25;
+            if(this.cargo.Equals("Ingeniero") || this.cargo.Equals("Especialista"))
+            {
+                add += 50;
+                adicional = ((this.sueldoBasico * add) / 100) * antiguedadEnEmpresa();
+            }else
+            {
+                adicional = ((this.sueldoBasico * add) / 100) * antiguedadEnEmpresa();
+            }
+        }else
+        {
+            add = 1;
+            if(this.cargo.Equals("Ingeniero") || this.cargo.Equals("Especialista"))
+            {
+                add += 50;
+                adicional = ((this.sueldoBasico * add) / 100) * antiguedadEnEmpresa();
+            }else
+            {
+                adicional = ((this.sueldoBasico * add) / 100) * antiguedadEnEmpresa();
+            }
+        }
+        return adicional;
+    }
+
+    public double Salario()
+    {
+        return this.sueldoBasico + Adicional();
+    }
+
+
+    public override string ToString()
+    {
+        return "Nombre: "+this.nombre+" /\nApellido: "+this.apellido+" /\nGenero: "+this.genero+" /\nEdad: "+edad()+
+                " / \nEstado Civil: "+this.estadoC+" /\nCargo: "+this.cargo+" /\nFecha de ingreso en la empresa: "+this.fechaIngreso+
+                " /\nSueldo: $USD "+this.sueldoBasico;
     }
 
 }
